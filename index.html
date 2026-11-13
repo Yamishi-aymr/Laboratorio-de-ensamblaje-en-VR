@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Laboratorio VR | Ensamblaje 3D</title>
+
+    <meta name="description"
+        content="Laboratorio virtual de manipulación y ensamblaje tridimensional mediante seguimiento de manos con Meta Quest 3 y WebXR.">
+
+    <meta name="theme-color" content="#080D1B">
+    <meta name="author" content="Desarrollador del Laboratorio VR">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicon.png">
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- IMPORT MAP: Three.js y complementos -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+        }
+    }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- =====================================
+         NAVEGACIÓN
+    ====================================== -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+         id="main-navbar"
+         aria-label="Navegación principal">
+
+        <div class="container">
+
+            <a class="navbar-brand d-flex align-items-center gap-2"
+               href="#inicio">
+
+                <i class="bi bi-boxes brand-icon"></i>
+
+                <span>
+                    LABORATORIO <strong>VR</strong>
+                </span>
+
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="Abrir menú">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#laboratorio">Laboratorio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#instrucciones">Instrucciones</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#requisitos">Requisitos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#autor">Desarrollador</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================
+         PORTADA PRINCIPAL
+    ====================================== -->
+
+    <header class="hero-section" id="inicio">
+
+        <div class="hero-glow glow-one"></div>
+        <div class="hero-glow glow-two"></div>
+
+        <div class="container">
+
+            <div class="row align-items-center min-vh-100 py-5">
+
+                <div class="col-lg-7">
+
+                    <div class="hero-content">
+
+                        <div class="status-label mb-4">
+                            <span class="status-dot"></span>
+                            EXPERIENCIA INMERSIVA WEBXR
+                        </div>
+
+                        <h1 class="hero-title">
+
+                            LABORATORIO
+
+                            <span class="gradient-text">
+                                VIRTUAL
+                            </span>
+
+                            DE ENSAMBLAJE 3D
+
+                        </h1>
+
+                        <p class="hero-description mt-4">
+
+                            Explora, manipula y ensambla objetos tridimensionales
+                            mediante seguimiento de manos y gestos naturales
+                            dentro de una experiencia de realidad virtual.
+
+                        </p>
+
+                        <div class="hero-buttons mt-4">
+
+                            <a href="#laboratorio"
+                               class="btn btn-primary-custom">
+
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                Explorar laboratorio
+
+                            </a>
+
+                            <a href="#instrucciones"
+                               class="btn btn-outline-custom">
+
+                                <i class="bi bi-info-circle me-2"></i>
+                                ¿Cómo funciona?
+
+                            </a>
+
+                        </div>
+
+                        <div class="hero-features mt-5">
+
+                            <div class="feature-mini">
+                                <i class="bi bi-hand-index-thumb"></i>
+                                <span>Hand Tracking</span>
+                            </div>
+
+                            <div class="feature-mini">
+                                <i class="bi bi-box"></i>
+                                <span>5 piezas 3D</span>
+                            </div>
+
+                            <div class="feature-mini">
+                                <i class="bi bi-headset-vr"></i>
+                                <span>Meta Quest 3</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-5 mt-5 mt-lg-0">
+
+                    <div class="hero-visual">
+
+                        <div class="visual-orbit orbit-one"></div>
+                        <div class="visual-orbit orbit-two"></div>
+
+                        <div class="visual-center">
+                            <i class="bi bi-boxes"></i>
+                        </div>
+
+                        <div class="floating-object object-one">
+                            <i class="bi bi-box-fill"></i>
+                        </div>
+
+                        <div class="floating-object object-two">
+                            <i class="bi bi-circle-fill"></i>
+                        </div>
+
+                        <div class="floating-object object-three">
+                            <i class="bi bi-triangle-fill"></i>
+                        </div>
+
+                        <div class="floating-object object-four">
+                            <i class="bi bi-cylinder"></i>
+                        </div>
+
+                        <div class="visual-caption">
+                            <span class="status-dot"></span>
+                            SISTEMA DE ENSAMBLAJE 3D
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         LABORATORIO
+    ====================================== -->
+
+    <section class="laboratory-section section-padding"
+             id="laboratorio">
+
+        <div class="container">
+
+            <div class="section-heading text-center mb-5">
+
+                <span class="section-tag">
+                    EXPERIENCIA VR
+                </span>
+
+                <h2>
+                    Tu espacio de <span class="gradient-text">ensamblaje</span>
+                </h2>
+
+                <p>
+                    Completa los cinco desafíos y construye el ensamblaje perfecto.
+                </p>
+
+            </div>
+
+
+            <div class="laboratory-card">
+
+                <div class="laboratory-header">
+
+                    <div>
+
+                        <span class="lab-indicator">
+                            <span class="status-dot"></span>
+                            SISTEMA PREPARADO
+                        </span>
+
+                        <h3 class="mt-2">
+                            Laboratorio de manipulación 3D
+                        </h3>
+
+                    </div>
+
+                    <div class="lab-version">
+                        THREE.JS / WEBXR
+                    </div>
+
+                </div>
+
+
+                <!-- Escena 3D -->
+                <div id="scene-container" class="scene-container">
+
+                    <div id="loading-screen" class="loading-screen">
+
+                        <div class="loading-spinner"></div>
+
+                        <h4>Preparando laboratorio</h4>
+
+                        <p>
+                            Inicializando entorno tridimensional...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Estado de compatibilidad -->
+                <div class="compatibility-panel">
+
+                    <div class="d-flex align-items-center gap-2">
+
+                        <i class="bi bi-info-circle"></i>
+
+                        <span
+                            id="compatibility-status"
+                            role="status"
+                            aria-live="polite">
+
+                            Comprobando compatibilidad WebXR...
+
+                        </span>
+
+                    </div>
+
+                    <div
+                        id="error-message"
+                        class="error-message mt-2"
+                        role="alert"
+                        aria-live="assertive">
+                    </div>
+
+                </div>
+
+
+                <!-- Acceso VR -->
+                <div class="laboratory-actions text-center">
+
+                    <div id="vr-button-container">
+
+                        <!-- Three.js insertará aquí el botón VR -->
+
+                    </div>
+
+                    <p class="vr-help mt-3">
+
+                        <i class="bi bi-headset-vr me-1"></i>
+
+                        Utiliza Meta Quest 3 y Meta Quest Browser
+                        para iniciar la experiencia inmersiva.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         INSTRUCCIONES
+    ====================================== -->
+
+    <section class="instructions-section section-padding"
+             id="instrucciones">
+
+        <div class="container">
+
+            <div class="section-heading text-center mb-5">
+
+                <span class="section-tag">
+                    GUÍA DE USO
+                </span>
+
+                <h2>
+                    ¿Cómo funciona el <span class="gradient-text">laboratorio?</span>
+                </h2>
+
+                <p>
+                    Utiliza tus manos para interactuar con los objetos virtuales.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="instruction-card">
+
+                        <div class="instruction-icon">
+                            <i class="bi bi-hand-index-thumb"></i>
+                        </div>
+
+                        <span class="step-number">01</span>
+
+                        <h4>Apunta</h4>
+
+                        <p>
+                            Dirige el rayo de tu mano hacia la pieza que deseas seleccionar.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="instruction-card">
+
+                        <div class="instruction-icon">
+                            <i class="bi bi-hand-index"></i>
+                        </div>
+
+                        <span class="step-number">02</span>
+
+                        <h4>Selecciona</h4>
+
+                        <p>
+                            Junta el dedo índice y el pulgar para sujetar una pieza.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="instruction-card">
+
+                        <div class="instruction-icon">
+                            <i class="bi bi-arrows-move"></i>
+                        </div>
+
+                        <span class="step-number">03</span>
+
+                        <h4>Arrastra</h4>
+
+                        <p>
+                            Mueve tu mano para transportar la pieza hasta su destino.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="instruction-card">
+
+                        <div class="instruction-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+
+                        <span class="step-number">04</span>
+
+                        <h4>Ensambla</h4>
+
+                        <p>
+                            Separa tus dedos para soltar la pieza y comprobar su colocación.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         OBJETIVOS
+    ====================================== -->
+
+    <section class="objectives-section section-padding">
+
+        <div class="container">
+
+            <div class="section-heading text-center mb-5">
+
+                <span class="section-tag">
+                    OBJETIVO DEL RETO
+                </span>
+
+                <h2>
+                    Cinco piezas, <span class="gradient-text">cinco destinos</span>
+                </h2>
+
+                <p>
+                    Identifica cada figura y encuentra su correspondiente espacio.
+                </p>
+
+            </div>
+
+
+            <div class="row g-3 justify-content-center">
+
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="objective-card">
+                        <div class="shape shape-cube"></div>
+                        <h5>Cubo</h5>
+                        <span>Destino 01</span>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="objective-card">
+                        <div class="shape shape-sphere"></div>
+                        <h5>Esfera</h5>
+                        <span>Destino 02</span>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="objective-card">
+                        <div class="shape shape-cone"></div>
+                        <h5>Cono</h5>
+                        <span>Destino 03</span>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="objective-card">
+                        <div class="shape shape-cylinder"></div>
+                        <h5>Cilindro</h5>
+                        <span>Destino 04</span>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="objective-card">
+                        <div class="shape shape-prism"></div>
+                        <h5>Prisma</h5>
+                        <span>Destino 05</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         REQUISITOS
+    ====================================== -->
+
+    <section class="requirements-section section-padding"
+             id="requisitos">
+
+        <div class="container">
+
+            <div class="section-heading text-center mb-5">
+
+                <span class="section-tag">
+                    COMPATIBILIDAD
+                </span>
+
+                <h2>
+                    Requisitos del <span class="gradient-text">sistema</span>
+                </h2>
+
+            </div>
+
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-md-4">
+
+                    <div class="requirement-card">
+
+                        <i class="bi bi-headset-vr"></i>
+
+                        <h4>Meta Quest 3</h4>
+
+                        <p>
+                            Visor de realidad virtual con seguimiento de manos habilitado.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="requirement-card">
+
+                        <i class="bi bi-globe2"></i>
+
+                        <h4>Meta Quest Browser</h4>
+
+                        <p>
+                            Navegador compatible con WebXR y sesiones immersive-vr.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="requirement-card">
+
+                        <i class="bi bi-wifi"></i>
+
+                        <h4>Conexión HTTPS</h4>
+
+                        <p>
+                            Acceso a la aplicación publicada en GitHub Pages.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         FOOTER / DATOS DEL DESARROLLADOR
+    ====================================== -->
+
+    <footer class="footer-section" id="autor">
+
+        <div class="container">
+
+            <div class="row gy-4 align-items-center">
+
+                <!-- Información del proyecto -->
+                <div class="col-md-6">
+
+                    <a href="#inicio" class="footer-brand">
+
+                        <i class="bi bi-boxes me-2"></i>
+
+                        LABORATORIO VR
+
+                    </a>
+
+                    <p class="footer-description mt-3">
+
+                        Aplicación web de realidad virtual para manipulación
+                        y ensamblaje tridimensional mediante Three.js y WebXR.
+
+                    </p>
+
+                    <div class="footer-technologies mt-3">
+
+                        <span>Three.js</span>
+                        <span>WebXR</span>
+                        <span>JavaScript</span>
+                        <span>Bootstrap 5</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Datos personales editables -->
+                <div class="col-md-6" >
+
+                    <div class="developer-panel">
+
+                        <h5 class="developer-title mb-3">
+
+                            <i class="bi bi-person-badge me-2"></i>
+                            Datos del desarrollador
+
+                        </h5>
+
+                        <p class="developer-info mb-2">
+
+                            <i class="bi bi-person me-2"></i>
+
+                            <strong>Nombre:</strong>
+                            <span>Alicia Yamileth Mariano Reséndiz</span>
+
+                        </p>
+
+                        <p class="developer-info mb-2">
+
+                            <i class="bi bi-mortarboard me-2"></i>
+
+                            <strong>Carrera:</strong>
+                            <span>Ingeniería en Tecnologías de la Información y Comunicaciones</span>
+
+                        </p>
+
+                        <p class="developer-info mb-2">
+
+                            <i class="bi bi-calendar3 me-2"></i>
+
+                            <strong>Semestre:</strong>
+                            <span>9°</span>
+
+                        </p>
+
+                        <p class="developer-info mb-0">
+
+                            <i class="bi bi-code-slash me-2"></i>
+
+                            <strong>Proyecto:</strong>
+                            <span>Laboratorio VR de ensamblaje 3D</span>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr class="footer-divider">
+
+
+            <!-- Créditos -->
+            <div class="row align-items-center gy-2">
+
+                <div class="col-md-6 text-center text-md-start">
+
+                    <p class="copyright mb-0">
+
+                        © 2026 Laboratorio VR. Todos los derechos reservados.
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-6 text-center text-md-end">
+
+                    <p class="copyright mb-0">
+
+                        Desarrollado con
+                        <i class="bi bi-heart-fill"></i>
+                        Three.js y WebXR.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================
+         SCRIPTS
+    ====================================== -->
+
+    <!-- Bootstrap JavaScript -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- Aplicación modular -->
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+
+</html>
